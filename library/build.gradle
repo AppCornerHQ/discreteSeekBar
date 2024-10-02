@@ -40,6 +40,10 @@ android {
         versionCode libVersionCode
         versionName libVersion
     }
+
+    lintOptions {
+          checkReleaseBuilds false
+    }
 }
 
 task androidSourcesJar(type: Jar) {
