@@ -42,6 +42,39 @@ android {
     }
 }
 
+task androidSourcesJar(type: Jar) {
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                artifact androidSourcesJar
+
+                groupId = 'org.adw.library'
+                artifactId = 'discrete-seekbar'
+                version = libVersion
+
+                pom {
+                    description = 'DiscreteSeekbar is my poor attempt to develop an android implementation of the Discrete Slider component from the Google Material Design Guidelines'
+                    url = 'https://github.com/AnderWeb/discreteSeekBar'
+
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 dependencies {
     compile 'com.android.support:support-v4:22.1.1'
 }
